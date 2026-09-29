@@ -1,0 +1,16 @@
+[Unit]
+Description=Minecraft Management Telegram Bot
+After=network.target
+
+[Service]
+Type=simple
+User=podman-svc
+WorkingDirectory=/home/podman-svc/pod/bot-minecraft
+# Added PYTHONPATH to allow imports from 'bot' package
+ExecStart=/usr/bin/env PYTHONPATH=/home/podman-svc/pod/bot-minecraft /home/podman-svc/pod/bot-minecraft/venv/bin/python /home/podman-svc/pod/bot-minecraft/bot/main.py
+Restart=always
+RestartSec=5
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=default.target
