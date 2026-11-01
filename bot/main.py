@@ -12,7 +12,11 @@ import utils
 
 logging.basicConfig(level=logging.INFO)
 
-bot = Bot(token=TOKEN)
+from aiogram.client.session.aiohttp import AiohttpSession
+
+proxy = os.getenv("TELEGRAM_PROXY")
+session = AiohttpSession(proxy=proxy) if proxy else AiohttpSession()
+bot = Bot(token=TOKEN, session=session)
 dp = Dispatcher()
 
 # Глобальная переменная для отслеживания лога
